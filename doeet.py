@@ -71,9 +71,17 @@ class NewTodo(webapp.RequestHandler):
       todo.author = users.get_current_user()
 
     todo.content = self.request.get('content')
-    todo.tags = [tag.strip() for tag in self.request.get('tags').split(',')]
+    todo.tags = self._get_tags(self.request.get('tags'))
     todo.put()
     self.redirect('/')
+
+  def _get_tags(self, tag_string):
+    tags = []
+    for tag in tag_string.split(','):
+      tag = tag.strip()
+      if not tag in tags:
+        tags.append(tag)
+    return tags
 
 class GetTodo(webapp.RequestHandler):
   def get(self, id):
@@ -97,12 +105,22 @@ class ReopenTodo(webapp.RequestHandler):
 
     self.response.out.write(todo.toJson())
 
+class TodosByTag(webapp.RequestHandler):
+  def get(self, tag):
+    user = users.get_current_user()
+    path = os.path.join(os.path.dirname(__file__), 'templates', 'index.html')
+
+    todos = db.Query(Todo).filter('author =', user).filter('tags = ',tag).order('date_done').order('date_added')
+    self.response.out.write(template.render(path, { 'login_link': users.create_login_url('/'), 'user': user, 'todos': todos }))
+    
+
 application = webapp.WSGIApplication([
   ('/', MainPage),
   ('/todos', NewTodo),
   ('/todos/([^/]*)', GetTodo),
   ('/todos/([^/]*)/done', DoneTodo),
-  ('/todos/([^/]*)/reopen', ReopenTodo)
+  ('/todos/([^/]*)/reopen', ReopenTodo),
+  ('/tags/([^/]*)', TodosByTag)
 ], debug=True)
 
 
