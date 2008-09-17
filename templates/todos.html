@@ -1,0 +1,8 @@
+{% for todo in todos %}
+<li {% if todo.done %}class="done"{% endif %}>
+  <span>{{ todo.content }}</span>
+  <span>{{ todo.date_added }}</span>
+  <input type="checkbox" value="{{ todo.key }}" id="todo-{{ todo.key }}" {% if todo.date_done %} checked {% endif %}/><label for="todo-{{ todo.key }}">done</label>
+  <a href="/todos/{{ todo.key }}">show</a>
+</li>
+{% endfor %}

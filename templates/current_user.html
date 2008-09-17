@@ -1,0 +1,5 @@
+{% if user %}
+  <span>Logged in as {{ user.email }}</span>
+{% else %}
+  <span><a href="{{ login_link}}">Log in</a> to see your to-dos</span>
+{% endif %}

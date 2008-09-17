@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>Do Eet !</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/style.css"/>
+    <script lang="Javascript" src="javascript/jquery-1.2.6.js"></script>
+    <script lang="Javascript" src="javascript/doeet-scripts.js"></script>
+  </head>
+  <body>
+    <div id="current_user">
+      {% include "current_user.html" %}
+    </div>
+    <ul id="todos">
+      {% include "todos.html" %}
+    </ul>
+    <div id="new_todo">
+      {% include "todo_form.html" %}
+    </div>
+  </body>
+</html>
