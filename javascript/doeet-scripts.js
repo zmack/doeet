@@ -11,6 +11,18 @@ function todo_status_modified(e) {
         }
       }
     })
+  } else {
+    $.ajax({
+      type: "PUT",
+      url: "/todos/" + checkbox.value + '/reopen',
+      success: function(msg) {
+        var todo = eval('(' + msg + ')');
+        if ( todo.date_done == '-' ) {
+          $('#todo-' + todo.key).parent().removeClass('done');
+        }
+      }
+    })
+
   }
 }
 

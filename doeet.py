@@ -28,6 +28,7 @@ from google.appengine.ext.webapp import template
 class Todo(db.Model):
   author = db.UserProperty()
   content = db.StringProperty(multiline=True)
+  tags = db.StringListProperty()
   date_done = db.DateTimeProperty()
   date_added = db.DateTimeProperty(auto_now_add=True)
 
@@ -37,14 +38,21 @@ class Todo(db.Model):
     else:
       date_done = '-'
     
-    return simplejson.dumps({'author': self.author.nickname(), 'content': self.content, 'date_added': self.date_added.isoformat(), 'date_done': date_done, 'key': self.key().__str__() })
+    return simplejson.dumps({'author': self.author.nickname(), 'content': self.content, 'date_added': self.date_added.isoformat(), 'date_done': date_done, 'tags': ",".join(self.tags), 'key': self.key().__str__() })
 
   def mark_done(self):
     if not self.date_done:
       self.date_done = datetime.datetime.now()
 
+  def reopen(self):
+    if self.date_done:
+      self.date_done = None
+
   def done(self):
     return self.date_done != None
+
+  def human_tags(self):
+    return ','.join(self.tags)
 
 
 class MainPage(webapp.RequestHandler):
@@ -63,13 +71,14 @@ class NewTodo(webapp.RequestHandler):
       todo.author = users.get_current_user()
 
     todo.content = self.request.get('content')
+    todo.tags = [tag.strip() for tag in self.request.get('tags').split(',')]
     todo.put()
     self.redirect('/')
 
 class GetTodo(webapp.RequestHandler):
   def get(self, id):
     todo = Todo.get(id)
-    self.response.out.write(todo)
+    self.response.out.write(todo.toJson())
 
 
 class DoneTodo(webapp.RequestHandler):
@@ -80,11 +89,20 @@ class DoneTodo(webapp.RequestHandler):
 
     self.response.out.write(todo.toJson())
 
+class ReopenTodo(webapp.RequestHandler):
+  def put(self, id):
+    todo = Todo.get(id)
+    todo.reopen()
+    todo.put()
+
+    self.response.out.write(todo.toJson())
+
 application = webapp.WSGIApplication([
   ('/', MainPage),
   ('/todos', NewTodo),
   ('/todos/([^/]*)', GetTodo),
-  ('/todos/([^/]*)/done', DoneTodo)
+  ('/todos/([^/]*)/done', DoneTodo),
+  ('/todos/([^/]*)/reopen', ReopenTodo)
 ], debug=True)
 
 
