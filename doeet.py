@@ -52,7 +52,10 @@ class Todo(db.Model):
     return self.date_done != None
 
   def human_tags(self):
-    return ','.join(self.tags)
+    return ','.join([self.link_to_tag(tag) for tag in self.tags])
+
+  def link_to_tag(self, tag):
+    return "<a href=\"/tags/" + tag +"\">" + tag + "</a>"
 
 
 class MainPage(webapp.RequestHandler):
