@@ -4,6 +4,16 @@ body {
   color: #1bb;
 }
 
+a {
+  text-decoration: none;
+  color: #faf;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #fad;
+}
+
 .done {
   color: #CCCCCC;
 }
