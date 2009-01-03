@@ -1,7 +1,23 @@
 body {
-  font-family: "Trebuchet MS";
-  background-color: #234;
+  margin: 0px;
   color: #1bb;
+  background-color: #234;
+  font-family: "Trebuchet MS";
+}
+
+#header {
+  overflow: hidden;
+  background-color: #afa;
+  margin-bottom: .5em;
+  border-bottom: .5em solid green;
+}
+
+#header h1 {
+  position: relative;
+  top: .4em;
+  margin: 0px;
+  font-size: 4em;
+  color: green;
 }
 
 a {
@@ -16,4 +32,37 @@ a:hover {
 
 .done {
   color: #CCCCCC;
+}
+
+#new_todo {
+  width: 220px;
+  padding-left: 2em;
+}
+
+#new_todo div {
+  background-color: #1bb;
+  padding: .5em 10px;
+}
+
+#new_todo label {
+  display: block;
+  font-size: 1.2em;
+  width: 80%;
+  position: relative;
+  top: .40em;
+}
+
+#new_todo textarea, #new_todo input[type=text] {
+  border: none;
+  color: #FFF;
+  background-color: transparent;
+  width: 200px;
+}
+
+#new_todo textarea:focus, #new_todo input[type=text]:focus {
+  background-color: green;
+}
+
+#new_todo input[type=submit] {
+  margin-top: 1em;
 }
