@@ -16,6 +16,7 @@
 #
 import os
 import cgi
+import urllib
 import datetime
 import wsgiref.handlers
 
@@ -112,8 +113,9 @@ class TodosByTag(webapp.RequestHandler):
   def get(self, tag):
     user = users.get_current_user()
     path = os.path.join(os.path.dirname(__file__), 'templates', 'index.html')
+    unescaped_tag = urllib.unquote(tag)
 
-    todos = db.Query(Todo).filter('author =', user).filter('tags = ',tag).order('date_done').order('date_added')
+    todos = db.Query(Todo).filter('author =', user).filter('tags = ',unescaped_tag).order('date_done').order('date_added')
     self.response.out.write(template.render(path, { 'login_link': users.create_login_url('/'), 'user': user, 'todos': todos }))
     
 
