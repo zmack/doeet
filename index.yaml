@@ -16,14 +16,14 @@ indexes:
   - name: date
     direction: desc
 
-# Used 70 times in query history.
+# Used 112 times in query history.
 - kind: Todo
   properties:
   - name: author
   - name: date_done
   - name: date_added
 
-# Used 50 times in query history.
+# Used 52 times in query history.
 - kind: Todo
   properties:
   - name: author

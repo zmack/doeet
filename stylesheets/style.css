@@ -30,13 +30,40 @@ a:hover {
   color: #fad;
 }
 
-.done {
+#todos {
+  width: 45%;
+  position: absolute;
+  padding: 0px;
+  margin-left: 1%;
+}
+
+#todos li.done {
+  font-size: .7em;
+}
+
+#todos li.done abbr.date, #todos li.done span.content {
   color: #CCCCCC;
+}
+
+#todos li {
+  list-style: none;
+  margin-bottom: .5em;
+}
+
+#todos abbr.date {
+  text-decoration: none;
+  border: none;
+  color: #FF4;
+} 
+
+#todos span.content {
+  display: block;
+  font-size: 1.5em;
 }
 
 #new_todo {
   width: 220px;
-  padding-left: 2em;
+  padding-left: 50%;
 }
 
 #new_todo div.focused label {

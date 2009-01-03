@@ -32,4 +32,8 @@ $( function(e) {
   })
   $('#todo_content, #todo_tags').focus(function(e) { $(this).parent('div').addClass('focused'); })
   $('#todo_content, #todo_tags').blur(function(e) { $(this).parent('div').removeClass('focused'); })
+  $('abbr.date').each( function(index, element) {
+    console.log(prettyDate);
+    element.innerHTML = prettyDate(element.title);
+  })
 });
