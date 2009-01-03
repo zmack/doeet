@@ -39,9 +39,12 @@ a:hover {
   padding-left: 2em;
 }
 
-#new_todo div {
-  background-color: #1bb;
-  padding: .5em 10px;
+#new_todo div.focused label {
+  color: #aaf;
+}
+
+#new_todo div.focused textarea, #new_todo div.focused input[type=text] {
+  background-color: #aaf;
 }
 
 #new_todo label {
@@ -50,12 +53,15 @@ a:hover {
   width: 80%;
   position: relative;
   top: .40em;
+  color: green;
 }
 
 #new_todo textarea, #new_todo input[type=text] {
   border: none;
   color: #FFF;
-  background-color: transparent;
+  background-color: green;
+  padding: 1em;
+  margin: 0px;
   width: 200px;
 }
 

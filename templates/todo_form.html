@@ -1,13 +1,13 @@
 <form action='/todos' method="POST">
 
-  <label for="todo_content">Content</label>
   <div>
-    <textarea id="doto_content" name="content"></textarea>
+    <label for="todo_content">Content</label>
+    <textarea id="todo_content" name="content" tabindex="1"></textarea>
   </div>
 
-  <label for="todo_tags">Tags</label>
   <div>
-    <input id="todo_tags" type="text" name="tags" />
+    <label for="todo_tags">Tags</label>
+    <input id="todo_tags" type="text" name="tags" tabindex="2" />
   </div>
-  <input type="submit" value="Add"/>
+  <input type="submit" value="Add" tabindex="3"/>
 </form>

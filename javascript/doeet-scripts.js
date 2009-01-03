@@ -22,10 +22,14 @@ function todo_status_modified(e) {
         }
       }
     })
-
   }
 }
 
 $( function(e) {
+  var element_date = new Date();
   $('#todos input[type="checkbox"]').click(todo_status_modified);
+  $('span.date').each( function(index,element) {
+  })
+  $('#todo_content, #todo_tags').focus(function(e) { $(this).parent('div').addClass('focused'); })
+  $('#todo_content, #todo_tags').blur(function(e) { $(this).parent('div').removeClass('focused'); })
 });
