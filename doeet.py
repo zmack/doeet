@@ -63,9 +63,10 @@ class MainPage(webapp.RequestHandler):
   def get(self):
     user = users.get_current_user()
     
-    todos = db.Query(Todo).filter('author =', user).order('date_done').order('date_added')
+    todos = db.Query(Todo).filter('author =', user).filter('date_done = ', None).order('date_added')
+    done_todos = db.Query(Todo).filter('date_done != ', None).order('-date_done').fetch(5)
     path = os.path.join(os.path.dirname(__file__), 'templates', 'index.html')
-    self.response.out.write(template.render(path, { 'login_link': users.create_login_url('/'), 'user': user, 'todos': todos }))
+    self.response.out.write(template.render(path, { 'login_link': users.create_login_url('/'), 'user': user, 'todos': todos, 'done_todos': done_todos}))
 
 class NewTodo(webapp.RequestHandler):
   def post(self):
