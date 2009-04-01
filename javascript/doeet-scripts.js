@@ -4,6 +4,7 @@ function todo_status_modified(e) {
     $.ajax({
       type: "PUT",
       url: "/todos/" + checkbox.value + '/done',
+      data: ";o", // can't sent zilch, google gets upset
       success: function(msg) {
         var todo = eval('(' + msg + ')');
         if ( todo.date_done != '-' ) {
@@ -15,6 +16,7 @@ function todo_status_modified(e) {
     $.ajax({
       type: "PUT",
       url: "/todos/" + checkbox.value + '/reopen',
+      data: ";o", // can't sent zilch, google gets upset
       success: function(msg) {
         var todo = eval('(' + msg + ')');
         if ( todo.date_done == '-' ) {
