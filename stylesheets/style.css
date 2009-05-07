@@ -89,7 +89,7 @@ a:hover {
   background-color: green;
   padding: 1em;
   margin: 0px;
-  width: 200px;
+  width: 400px;
 }
 
 #new_todo textarea:focus, #new_todo input[type=text]:focus {

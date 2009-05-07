@@ -30,10 +30,15 @@ function todo_status_modified(e) {
 $( function(e) {
   var element_date = new Date();
   $('#todos input[type="checkbox"]').click(todo_status_modified);
-  $('span.date').each( function(index,element) {
-  })
   $('#todo_content, #todo_tags').focus(function(e) { $(this).parent('div').addClass('focused'); })
   $('#todo_content, #todo_tags').blur(function(e) { $(this).parent('div').removeClass('focused'); })
+  $('li span.content').each(
+    function(index,element) {
+      z = element.innerHTML.match(/http:\/\/([^/]+)[^ ]+/);
+      if ( z!= null) {
+        element.innerHTML = element.innerHTML.replace(z[0], '<a href="'+z[0]+'">'+z[1]+'</a>')
+      }
+    }) 
   $('abbr.date').each( function(index, element) {
     element.innerHTML = prettyDate(element.title);
   })
